@@ -18,7 +18,7 @@
 // 3. Friendship Status
     // check if A is a friend of B : either sets or binary search??
 
-//4. UI 
+//4. UI : designing the user interface
 //login page
 //settings page
 //find ppl page
