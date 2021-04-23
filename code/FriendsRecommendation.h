@@ -45,19 +45,4 @@ struct System                  //Controls the entire program
 //various menus
 
 
-void this part will execute the k friends stuff
-{
-    .
-    .
-    .
-    .
-    .
-    .
-    .
-    .
-    .
-    .
-    .
-}
-
 #endif
