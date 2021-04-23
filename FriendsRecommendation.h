@@ -7,6 +7,26 @@
 // user details: city age name etc
 // list of ppl the user follows
 
+struct UserDetails             //stores the details of the Users registered on our system
+{
+    int UserId;
+    int Age;
+    char* Name;
+    char* City;
+    char* Organization;
+};
+struct System                  //Controls the entire program 
+{
+    int NoOfUsers;             //stores total users registered
+    int NextID;                //stores what should be the ID if a new user joins
+                               //BST to store the ID of the unregistered users
+                               //hashmap to store the user and their ids
+    // void AddNewUser()
+    // {
+    //     NewUser= InitUSer(NextID);
+    // }
+};
+
 
 //2. Recommending friends
 // for registered users
@@ -24,6 +44,20 @@
 //find ppl page
 //various menus
 
-hgfgdaslg;hdfutuhw  whhdfkjhkdfkasns
+
+void this part will execute the k friends stuff
+{
+    .
+    .
+    .
+    .
+    .
+    .
+    .
+    .
+    .
+    .
+    .
+}
 
 #endif
