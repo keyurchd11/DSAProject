@@ -15,6 +15,7 @@ struct UserDetails             //stores the details of the Users registered on o
     char* City;
     char* Organization;
 };
+
 struct System                  //Controls the entire program 
 {
     int NoOfUsers;             //stores total users registered
