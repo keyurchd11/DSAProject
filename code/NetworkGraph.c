@@ -3,7 +3,7 @@
 // chain, the UserID,followers and following list is present
 
 #include<stdlib.h>
-#include "DSA_Project.h"
+#include "FriendsRecommendation.h"
 #include "AVL.c"
 #include "Followers.c"
 
