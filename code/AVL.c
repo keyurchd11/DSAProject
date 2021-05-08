@@ -61,7 +61,7 @@ Node InitAVLNode(int val)
     return temp;
 }
 /////////////////////////////////
-//RotateLeft (node Pivot)
+// RotateLeft (node Pivot)
 // if the tree is not balanced,and heavy towards right side
 Node RotateLeft(Node Pivot)
 {
@@ -102,7 +102,7 @@ Node insert(Node Root, int val)
 
     if (Root == NULL)
     {
-        return createNode(val);
+        return InitAVLNode(val);
     }
     else if (val < Root->data)
     {
@@ -117,24 +117,24 @@ Node insert(Node Root, int val)
 
     Root->height = max(height(Root->left), height(Root->right)) + 1;
 
-    int balance = getHightBalance(Root);
+    int balance = getBalance(Root);
 
     if (balance > 1 && val < Root->left->data)
-        return rotateRight(Root);
+        return RotateRight(Root);
 
     if (balance < -1 && val > Root->right->data)
-        return rotateLeft(Root);
+        return RotateLeft(Root);
 
     if (balance > 1 && val > Root->left->data)
     {
-        Root->left = rotateLeft(Root->left);
-        return rotateRight(Root);
+        Root->left = RotateLeft(Root->left);
+        return RotateRight(Root);
     }
 
     if (balance < -1 && val < Root->right->data)
     {
-        Root->right = rotateRight(Root->right);
-        return rotateLeft(Root);
+        Root->right = RotateRight(Root->right);
+        return RotateLeft(Root);
     }
 
     return Root;
@@ -174,8 +174,8 @@ void DeleteAVL(Node root)
     // collapse_tree(root);
     if (root != NULL)
     {
-        collapse_tree(root->left);
-        collapse_tree(root->right);
+        DeleteAVL(root->left);
+        DeleteAVL(root->right);
         free(root);
     }
 }
@@ -210,7 +210,7 @@ bool search(Node t, int val)
 Node remove_node(Node t, int val)
 {
     if (t == NULL)
-        return;
+        return t;
     else if (val < t->data)
     {
         t->left = remove_node(t->left, val);
@@ -247,25 +247,34 @@ Node remove_node(Node t, int val)
         return t;
 
     t->height = max(height(t->left), height(t->right)) + 1;
-    int balance = getHightBalance(t);
+    int balance = getBalance(t);
 
-    if (balance > 1 && getHightBalance(t->left) >= 0)
-        return rotateRight(t);
+    if (balance > 1 && getBalance(t->left) >= 0)
+        return RotateRight(t);
 
-    if (balance > 1 && getHightBalance(t->left) < 0)
+    if (balance > 1 && getBalance(t->left) < 0)
     {
-        t->left = rotateLeft(t->left);
-        return rotateRight(t);
+        t->left = RotateLeft(t->left);
+        return RotateRight(t);
     }
 
-    if (balance < -1 && getHightBalance(t->right) <= 0)
-        return rotateLeft(t);
+    if (balance < -1 && getBalance(t->right) <= 0)
+        return RotateLeft(t);
 
-    if (balance < -1 && getHightBalance(t->right) > 0)
+    if (balance < -1 && getBalance(t->right) > 0)
     {
-        t->right = rotateRight(t->right);
-        return rotateLeft(t);
+        t->right = RotateRight(t->right);
+        return RotateLeft(t);
     }
 
     return t;
 }
+
+
+
+struct AVLNodeQ_
+{
+    Node data;
+    struct AVLNodeQ_*Next;
+};
+typedef struct AVLNodeQ_* AVLq;
