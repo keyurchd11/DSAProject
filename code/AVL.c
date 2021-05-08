@@ -180,7 +180,6 @@ void DeleteAVL(Node root)
     }
 }
 
-
 //////////////////////////////////////////////
 // function: search(t,val)
 // t-> root , val-> value to be searched
@@ -233,14 +232,14 @@ Node remove_node(Node t, int val)
             {
                 old = t;
                 t = NULL;
+                free(old);
             }
             else
+            {
+                free(t);
                 t = old;
-            // free old node
-            free(old);
+            }
         }
-        else
-            ;
     }
 
     if (t == NULL)
@@ -270,11 +269,9 @@ Node remove_node(Node t, int val)
     return t;
 }
 
-
-
 struct AVLNodeQ_
 {
     Node data;
-    struct AVLNodeQ_*Next;
+    struct AVLNodeQ_ *Next;
 };
-typedef struct AVLNodeQ_* AVLq;
+typedef struct AVLNodeQ_ *AVLq;
