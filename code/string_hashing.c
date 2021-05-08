@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "update_avl.c"
+#include "AVL.c" // include AVL TREE functions
 
 struct string_node // Node  in separate chaining of Hash table
 {
@@ -66,19 +66,19 @@ string_node Find_in_string(Hash_table H, char *string)
 {
     unsigned int hash = gethash(string, H);
     string_node Q = H->arr[hash]->next;
-    while (Q != NULL && strcmp(Q->string_name, string) != 0)     // traveres if string doesn't match
+    while (Q != NULL && strcmp(Q->string_name, string) != 0) // traveres if string doesn't match
     {
         Q = Q->next;
     }
     return Q;
 }
 
-// Inserting the user in Avl Tree if it already exists 
+// Inserting the user in Avl Tree if it already exists
 // If not Creates a New Avl Tree for String and insert the user
 
-void Insert_string(Hash_table H, char *string, int id)  
+void Insert_string(Hash_table H, char *string, int id)
 {
-    string_node Q = Find_in_table(H, string);
+    string_node Q = Find_in_string(H, string);
     if (Q != NULL)
     {
         Q->root = insert(Q->root, id);
@@ -91,15 +91,15 @@ void Insert_string(Hash_table H, char *string, int id)
         Q = H->arr[index];
         string_node Q_new = malloc(sizeof(struct string_node));
         strcpy(Q_new->string_name, string); // coping string name in new node
-        Q->root = InitAVLNode(id);          // initiating new AVL root for new city
-
-        Q_new->next = Q->next;
+        Q_new->root = NULL;                 // initiating new AVL root for new city
+        Q_new->next = Q->next;              // Q->root = insert(Q->root,id);
         Q->next = Q_new;
+        Q_new->root = insert(Q_new->root, id);
     }
 }
 
 void Deleting_string_user(Hash_table H, int id, char *string) // take id and city/organization from user node
 {
-    string_node Q = Find_in_table(H, string);
+    string_node Q = Find_in_string(H, string);
     Q->root = remove_node(Q->root, id); // removing user from AVL tree of City/Organization
 }
