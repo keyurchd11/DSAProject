@@ -103,3 +103,23 @@ void Deleting_string_user(Hash_table H, int id, char *string) // take id and cit
     string_node Q = Find_in_string(H, string);
     Q->root = remove_node(Q->root, id); // removing user from AVL tree of City/Organization
 }
+Hash_table Init_city_Ht()//call in main before first user registers to allocate a hash table to cities
+{
+    Hash_table city=init_hash(N);
+    return city;
+}
+Hash_table Init_organisation_Ht()//call in main before first user registers to allocate a hash table to organizations
+{
+    Hash_table organization=init_hash(N);
+    return organization;
+}
+void Insert_in_both_string_tables(struct UserDetails User,Hash_table city,Hash_table organization)//call everytime when a new user registers
+{
+   Insert_string(city,User->City,User->UserId);
+   Insert_string(organization,User->Organization,User->UserId);
+}
+void Delete_in_both_string_tables(struct UserDetails User,Hash_table city,Hash_table organization)//call everytime when a user unregisters
+{
+    Deleting_string_user(city,User->UserId,User->City);
+    Deleting_string_user(organization,User->UserId,User->Organisation)
+}
