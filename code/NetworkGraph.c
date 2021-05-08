@@ -3,9 +3,9 @@
 // chain, the UserID,followers and following list is present
 
 #include<stdlib.h>
-#include "FriendsRecommendation.h"
+// #include "DSA_Project.h"
 #include "AVL.c"
-#include "Followers.c"
+// #include "Followers.c"
 
 /////////////////////////////////////////////////////////////////////////////
 // structure   : User
@@ -15,10 +15,10 @@ struct User
     // the unique ID of the user for whom the data is being stored
     int UserID;
 
-    //a linked list which stores all followers of the user
-    Followers Follower;
+    //an AVL which stores followers of the user
+    Node Follower;
 
-    //an AVL which stores all users follower by the user
+    //an AVL which stores all users followed by the user
     Node Friend;
 
     // pointer to next node in separate chaining
@@ -122,17 +122,14 @@ void DeleteUser(int UserID)
 
 //////////////////////////////////////////////////////////////////////////////
 // function : AddFriend(ID1,ID2)
+// we are making User1 a friend of User2
 // input    : unique ID corresponding to the 2 users
 // result   : adds user2 in following list of user1
 //            adds user 1 in followers list of user2
 void AddFriend(int UserID1,int UserID2)
 {
     struct User* User1=GetUser(UserID1);
-    insert(User1->Friend,UserID2);
+    User1->Friend=insert(User1->Friend,UserID2);
     struct  User* User2= GetUser(UserID2);
-    Followers NewNode=NULL;
-    NewNode=(Followers)malloc(sizeof(struct Followers_));
-    NewNode->data=UserID1;
-    NewNode->next=User2->Follower;
-    User2->Follower=NewNode;
+    User2->Follower=insert(User2->Follower,UserID1);
 }
