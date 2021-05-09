@@ -1,4 +1,4 @@
-DSA Friends Recommendation Project
+DSA Friends Recommendation Project \n
 Team 55
 International Institute of Information Technology Hyderabad
 ---------------------------------------------------------------------------------------------------------------------------------------
