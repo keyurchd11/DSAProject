@@ -54,6 +54,7 @@ Node InitAVLNode(int val)
 {
     Node temp = NULL;
     temp = (Node)malloc(sizeof(struct AVLNode));
+    // initialising the values to 0/NULL
     temp->data = val;
     temp->height = 0;
     temp->left = NULL;
@@ -86,7 +87,7 @@ Node RotateRight(Node Pivot)
     //right rotation
     x->right = Pivot;
     Pivot->left = t2;
-
+    // adjusting the height
     Pivot->height = max(height(Pivot->left), height(Pivot->right)) + 1;
     x->height = max(height(x->left), height(x->right)) + 1;
 
@@ -95,6 +96,8 @@ Node RotateRight(Node Pivot)
 
 ////////////////////////////////////
 //function: insert(root,val): inserts the val in the tree with given root
+//        : the new node is inserted such that the AVL property is not
+//        : violated and the AVL remains balanced
 //input: root of tree, value to be inserted
 //output: returns the tree after the insertion of the given value
 Node insert(Node Root, int val)
@@ -142,6 +145,9 @@ Node insert(Node Root, int val)
 
 ////////////////////////////////////////////////////////////////
 //go as left as possible and get smallest number in the AVL
+// findMin(Node t)
+// input : Root of the AVL tree/subtree
+// output: the smallest value of a node in a AVL tree
 int findMin(Node t)
 {
     Node temp = t;
@@ -155,6 +161,9 @@ int findMin(Node t)
 
 ////////////////////////////////////////////////////////////////
 //go as right as possible and get the largest number in the AVL
+// findMax(Node t)
+// input : Root of the AVL tree/subtree
+// output: the largest value of a node in a AVL tree
 int findMax(Node t)
 {
     Node temp = t;
@@ -269,6 +278,9 @@ Node remove_node(Node t, int val)
     return t;
 }
 
+
+//////////////////////////////////////////////////////////////////////
+// structure to make a queue of AVLNodes which will be used in BFS.c
 struct AVLNodeQ_
 {
     Node data;
