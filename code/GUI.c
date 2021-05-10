@@ -4,11 +4,21 @@
 #include <sys/ioctl.h>
 #include <unistd.h>
 
-//gotoxy() function definition
+/////////////////////////////////////////////////////////////////////////////
+// this file contains all functions used to format the output of thep program
+
+
+/////////////////////////////////////////////////////////////////////////////
+// function: gotoxy() 
+// the output will be done from the coordinate (x,y) in screen
+// input   : x and y
 void gotoxy(int x, int y)
 {
     printf("%c[%d;%df", 0x1B, y, x);
 }
+
+/////////////////////////////////////////////////////////////////////////////
+// The below functions are used to display text in various colors
 void printRed(char *str)
 {
     printf("\e[38;5;196m%s", str);
@@ -46,7 +56,12 @@ void blueBG(char *str)
     printf("\033[1;31;49m");
     // printf("\e[48;2;0;0;49m");
 }
+// the text formatting functions end here
+/////////////////////////////////////////////////////////////////////////////
 
+/////////////////////////////////////////////////////////////////////////////
+// this functions displays a border with '*'characters which acts as the 
+// boundary for the program
 void border_with_delay()
 {
     
@@ -78,6 +93,9 @@ void border_with_delay()
     }
 }
 
+/////////////////////////////////////////////////////////////////////////////
+// function: MidBox()
+// displays a smaller box in mid where all operations can be done
 void MidBox()
 {
     for (int i = 16; i < 65; i++)
