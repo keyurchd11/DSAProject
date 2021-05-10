@@ -60,30 +60,55 @@ HOW TO RUN TEST CASES?
 >>>When you run the program, an interface will open. All the details and steps will be there in the interface.
 
 >>>When the MENU opens:
+   
    Five options will be available:-
+   
    Choose the option number for performing a specific function.
+   
    1. Add New User 
+      
       Option: 1
+      
       Inputs required = Name , Age , Organization , City
+   
    2. Get Details of a User from USERID 
+      
       Option: 2
+      
       Inputs required = USERID of the user
+  
    3. Make Friends 
+     
       Option: 3
+     
       Inputs required = USERIDs of two users(The one who is following and one who is being followed)
+  
    4. Show Friends of a User
+     
       Option: 4
+    
       Inputs required = USERID of the user
+   
    5. Show Friend Recommendation for a User 
+      
       Option: 5
+      
       Inputs required = USERID for the User whose recommendations are to be found , Number of recommendations
+   
    6. Unregister a user
+      
       Option: 6
+      
       Inputs required = USERID of the User
+   
    7. Check Friendship status
+      
       Option: 7
+      
       Inputs required = USERIDs of both the Users 
+   
    8. Exit
+      
       Option: 8
    
 -------------------------------------------
