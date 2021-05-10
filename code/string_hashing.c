@@ -5,13 +5,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "AVL.c" // include AVL TREE functions
+// #include "AVL.c" // include AVL TREE functions
 
 struct string_node // Node  in separate chaining of Hash table
 {
     char string_name[25]; // name of city/ organization
     int Id;               // user Id
     Node root;            // Node for AVl tree fro distinct string
+    int NoOfUsers;
     struct string_node *next;
 };
 
@@ -40,6 +41,7 @@ Hash_table init_hash(int size) // for  creating new hash table
         H->arr[i]->string_name[0] = '\0';
         H->arr[i]->next = NULL;
         H->arr[i]->root = NULL;
+        H->arr[i]->NoOfUsers=0;
     }
 
     return H;
@@ -82,6 +84,7 @@ void Insert_string(Hash_table H, char *string, int id)
     if (Q != NULL)
     {
         Q->root = insert(Q->root, id);
+        Q->NoOfUsers++;
         //insert in AVL tree (As every city as distinct ALV tree if we find
         // same city again we insert ID in that particular AVL tree
     }
@@ -95,6 +98,7 @@ void Insert_string(Hash_table H, char *string, int id)
         Q_new->next = Q->next;              // Q->root = insert(Q->root,id);
         Q->next = Q_new;
         Q_new->root = insert(Q_new->root, id);
+        Q_new->NoOfUsers++;
     }
 }
 
@@ -102,24 +106,22 @@ void Deleting_string_user(Hash_table H, int id, char *string) // take id and cit
 {
     string_node Q = Find_in_string(H, string);
     Q->root = remove_node(Q->root, id); // removing user from AVL tree of City/Organization
+    Q->NoOfUsers--;
+    
 }
-Hash_table Init_city_Ht()//call in main before first user registers to allocate a hash table to cities
+Hash_table Init_city_Ht() //call in main before first user registers to allocate a hash table to cities
 {
-    Hash_table city=init_hash(N);
+    Hash_table city = init_hash(N);
     return city;
 }
-Hash_table Init_organisation_Ht()//call in main before first user registers to allocate a hash table to organizations
+Hash_table Init_organisation_Ht() //call in main before first user registers to allocate a hash table to organizations
 {
-    Hash_table organization=init_hash(N);
+    Hash_table organization = init_hash(N);
     return organization;
 }
-void Insert_in_both_string_tables(struct UserDetails User,Hash_table city,Hash_table organization)//call everytime when a new user registers
+void Insert_in_both_string_tables(int userID,char* cityName,char* orgName, Hash_table city, Hash_table organization) //call everytime when a new user registers
 {
-   Insert_string(city,User->City,User->UserId);
-   Insert_string(organization,User->Organization,User->UserId);
+    Insert_string(city, cityName, userID);
+    Insert_string(organization, orgName, userID);
 }
-void Delete_in_both_string_tables(struct UserDetails User,Hash_table city,Hash_table organization)//call everytime when a user unregisters
-{
-    Deleting_string_user(city,User->UserId,User->City);
-    Deleting_string_user(organization,User->UserId,User->Organisation)
-}
+
