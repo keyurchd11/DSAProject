@@ -14,9 +14,13 @@ So we decided to come up with own system to recommend friends.
 ABOUT
 
 The project is on Friends Recommendation system.
+
 A system which manages our friends. The system keeps record of the people we wish to follow and people who wish to follow us along with the details(like age , city , organization).
+
 This system is a bit different from the facebook. In this system a person A may follow person B but person B need not follow person A.  
+
 A new user can register and delete his/her account very easily. Each user has his/her unique UserID.
+
 The system recommends friends to you(makes it easier to search friends).
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -32,11 +36,16 @@ HOW DOES THE SYSTEM WORK?
     AGE
     CITY
     ORGANIZATION(May be School/University/Profession etc)
+
 >>>The user will be given a USERID(It will be unique). The USERID given will be the least of the available USERIDs.
+
 >>>When the user registers he/she will be given 10 friend recommendations. The recommendation will be on the basis of most number of    common parameters. The more parameters a user has in common, the more preferred it will be.
+
 >>>For an already registered user the recommendations are given on the basis of second friends(friends of friends) , third friends etc.
 The order of preference is: second friends > third friends > fourth friends and so on.
+
 >>>The user can unregister from the system just by using his/her USERID. After unregistration the USERID can be used again.
+
 >>>Also the you can visit the details of any user using the USERID.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
@@ -49,6 +58,7 @@ You are just required to compile the file Menu.c and then run the program.
 HOW TO RUN TEST CASES?
 
 >>>When you run the program, an interface will open. All the details and steps will be there in the interface.
+
 >>>When the MENU opens:
    Five options will be available:-
    Choose the option number for performing a specific function.
@@ -80,10 +90,15 @@ HOW TO RUN TEST CASES?
 TEAM MEMBERS
 
 KEYUR GANESH CHAUDHARY
+
 HARSHAVARDHAN THATIPAMULA
+
 MUDHIREDDY NANDINI REDDY
+
 ROHIT REDDY LINGALA
+
 YALAKA SURYA TEJA REDDY
+
 -------------------------------------------
 
 
