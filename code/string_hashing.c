@@ -1,11 +1,17 @@
 //////////////////////////////////////////////////////////////////////////////////////
-///////////   *******HASH TABLE FOR STRINGS ************             ////////////////
-////////////////////////////////////////////////////////////////////////////////////
+///////////                HASH TABLE FOR STRINGS                     ////////////////
+//////////////////////////////////////////////////////////////////////////////////////
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-// #include "AVL.c" // include AVL TREE functions
+
+//////////////////////////////////////////////////////////////////////////////////////
+// This file contains string hashing functions
+// Purpose: We use string hashing to store the various cities and organizations
+//          registered with our system.Every time a new user with same organization
+//          or city registers, we find all the users with same org,city and recommend
+//////////////////////////////////////////////////////////////////////////////////////
 
 struct string_node // Node  in separate chaining of Hash table
 {
@@ -41,13 +47,14 @@ Hash_table init_hash(int size) // for  creating new hash table
         H->arr[i]->string_name[0] = '\0';
         H->arr[i]->next = NULL;
         H->arr[i]->root = NULL;
-        H->arr[i]->NoOfUsers=0;
+        H->arr[i]->NoOfUsers = 0;
     }
 
     return H;
 }
 
-unsigned int gethash(char *s, Hash_table H) // function for hash value of particular string
+// function for hash value of particular string
+unsigned int gethash(char *s, Hash_table H)
 {
     unsigned int hash = 0;
     if (H->iSize == 0)
@@ -93,7 +100,7 @@ void Insert_string(Hash_table H, char *string, int id)
         unsigned int index = gethash(string, H);
         Q = H->arr[index];
         string_node Q_new = malloc(sizeof(struct string_node));
-        strcpy(Q_new->string_name, string); // coping string name in new node
+        strcpy(Q_new->string_name, string); // copying string name in new node
         Q_new->root = NULL;                 // initiating new AVL root for new city
         Q_new->next = Q->next;              // Q->root = insert(Q->root,id);
         Q->next = Q_new;
@@ -107,21 +114,23 @@ void Deleting_string_user(Hash_table H, int id, char *string) // take id and cit
     string_node Q = Find_in_string(H, string);
     Q->root = remove_node(Q->root, id); // removing user from AVL tree of City/Organization
     Q->NoOfUsers--;
-    
 }
-Hash_table Init_city_Ht() //call in main before first user registers to allocate a hash table to cities
+//call in main before first user registers to allocate a hash table to cities
+Hash_table Init_city_Ht()
 {
     Hash_table city = init_hash(N);
     return city;
 }
-Hash_table Init_organisation_Ht() //call in main before first user registers to allocate a hash table to organizations
+//call in main before first user registers to allocate a hash table to organizations
+Hash_table Init_organisation_Ht()
 {
     Hash_table organization = init_hash(N);
     return organization;
 }
-void Insert_in_both_string_tables(int userID,char* cityName,char* orgName, Hash_table city, Hash_table organization) //call everytime when a new user registers
+void Insert_in_both_string_tables(int userID, char *cityName, char *orgName, Hash_table city, Hash_table organization) //call everytime when a new user registers
 {
     Insert_string(city, cityName, userID);
     Insert_string(organization, orgName, userID);
 }
+
 
