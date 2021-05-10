@@ -8,7 +8,8 @@ International Institute of Information Technology Hyderabad
 MOTIVATION
 
 We are fascinated about how Facebook manages to recommend friends which are in most of the cases related to us in some ways.
-This served as an inspiration to design our own Friends Recommendation System.
+
+So we decided to come up with own system to recommend friends.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 ABOUT
@@ -17,12 +18,11 @@ The project is on Friends Recommendation system.
 
 A system which manages our friends. The system keeps record of the people we wish to follow and people who wish to follow us along with the details(like age , city , organization).
 
-In this system a person A may follow person B, but it does not imply that person B follows person A.  
+This system is a bit different from the facebook. In this system a person A may follow person B but person B need not follow person A.  
 
 A new user can register and delete his/her account very easily. Each user has his/her unique UserID.
 
-The system recommends friends to both new users, as well as already registered users.
-We can also search friends quickly.
+The system recommends friends to you(makes it easier to search friends).
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 PROGRAMMING LANGUAGE
@@ -32,42 +32,43 @@ The whole code has been written using basic C language. The core concepts used i
 ---------------------------------------------------------------------------------------------------------------------------------------
 HOW DOES THE SYSTEM WORK?
 
->>>When the user registers in the system the user will have to fill the following details:
+When the user registers in the system the user will have to fill the following details:
+    
     NAME
+    
     AGE
+    
     CITY
+    
     ORGANIZATION(May be School/University/Profession etc)
 
->>>The user will be given a USERID(It will be unique). The USERID given will be the least of the available USERIDs.
+The user will be given a USERID(It will be unique). The USERID given will be the least of the available USERIDs.
 
->>>When the user registers he/she will be given 10 friend recommendations. The recommendation will be on the basis of most number of    common parameters. The more parameters a user has in common, the more preferred it will be.
+When the user registers he/she will be given 10 friend recommendations. The recommendation will be on the basis of most number of    common parameters. The more parameters a user has in common, the more preferred it will be.
 
->>>For an already registered user the recommendations are given on the basis of second friends(friends of friends) , third friends etc.
+For an already registered user the recommendations are given on the basis of second friends(friends of friends) , third friends etc.
 The order of preference is: second friends > third friends > fourth friends and so on.
 
->>>The user can unregister from the system just by using his/her USERID. After unregistration the USERID can be used again.
+The user can unregister from the system just by using his/her USERID. After unregistration the USERID can be used again.
 
->>>Also the you can visit the details of any user using the USERID.
+Also the you can visit the details of any user using the USERID.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 INSTRUCTIONS ON COMPILATION
 
 You are just required to compile the file Menu.c and then run the program.
-Commands:
-gcc Menu.c
-./a.out
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 HOW TO RUN TEST CASES?
 
->>>When you run the program, an interface will open. All the details and steps will be there in the interface.
+When you run the program, an interface will open. All the details and steps will be there in the interface.
 
->>>When the MENU opens:
+When the MENU opens:
    
-   Five options will be available:-
+Five options will be available:-
    
-   Choose the option number for performing a specific function.
+Choose the option number for performing a specific function.
    
    1. Add New User 
       
