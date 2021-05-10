@@ -2,7 +2,7 @@
 // We make a hashmap of users using separate chaining. In each node of the
 // chain, the UserID,followers and following list is present
 
-#include<stdlib.h>
+#include <stdlib.h>
 // #include "DSA_Project.h"
 #include "AVL.c"
 // #include "Followers.c"
@@ -23,13 +23,14 @@ struct User
 
     // pointer to next node in separate chaining
     struct User *NextUser;
+    int NoOfFriends;
+    int NoOfFollowers;
 };
 
 /////////////////////////////////////////////////////////////////////////////
 //HashMap for storing the Graph
 #define GraphHTSize 10000
 struct User *GraphHT[GraphHTSize];
-
 
 /////////////////////////////////////////////////////////////////////////////
 // function : InitGraphHT()
@@ -40,7 +41,6 @@ void InitGraphHT()
         GraphHT[i] = NULL;
 }
 
-
 /////////////////////////////////////////////////////////////////////////////
 // function: GraphHashFunction
 // input   : ID of the user for whom hash key is to be found
@@ -49,7 +49,6 @@ int GraphHashFunction(int UserID)
 {
     return UserID % GraphHTSize;
 }
-
 
 /////////////////////////////////////////////////////////////////////////////
 // function: InsertInGraph
@@ -62,8 +61,10 @@ void InsertInGraphHT(int UserID)
     struct User *NewNode = (struct User *)malloc(sizeof(struct User));
     NewNode->NextUser = NULL;
     NewNode->UserID = UserID;
-    NewNode->Friend=NULL;
-    NewNode->Follower=NULL;
+    NewNode->Friend = NULL;
+    NewNode->Follower = NULL;
+    NewNode->NoOfFriends = 0;
+    NewNode->NoOfFollowers = 0;
     if (GraphHT[HashKey] == NULL)
     {
         GraphHT[HashKey] = NewNode;
@@ -78,7 +79,6 @@ void InsertInGraphHT(int UserID)
         Walk->NextUser = NewNode;
     }
 }
-
 
 /////////////////////////////////////////////////////////////////////////////
 // function : GetUser(UserID)
@@ -102,7 +102,6 @@ struct User *GetUser(int UserID)
     }
 }
 
-
 /////////////////////////////////////////////////////////////////////////////
 // function : DeleteUser(UserID)
 // input    : UserID of the user who is unregistering
@@ -114,11 +113,27 @@ void DeleteUser(int UserID)
     struct User *Walk = GraphHT[HashKey];
     if (Walk->UserID == UserID)
     {
-        //change the AVL of others
-        //delete the node
+        GraphHT[HashKey] = Walk->NextUser;
+        DeleteAVL(Walk->Friend);
+        DeleteAVL(Walk->Follower);
+        free(Walk);
+        return;
+    }
+    struct User *Next = Walk->NextUser;
+    while (Next != NULL)
+    {
+        if (Next->UserID == UserID)
+        {
+            Walk->NextUser = Next->NextUser;
+            DeleteAVL(Walk->Follower);
+            DeleteAVL(Walk->Friend);
+            free(Next);
+            return;
+        }
+        Walk = Next;
+        Next = Next->NextUser;
     }
 }
-
 
 //////////////////////////////////////////////////////////////////////////////
 // function : AddFriend(ID1,ID2)
@@ -126,10 +141,18 @@ void DeleteUser(int UserID)
 // input    : unique ID corresponding to the 2 users
 // result   : adds user2 in following list of user1
 //            adds user 1 in followers list of user2
-void AddFriend(int UserID1,int UserID2)
+void AddFriend(int UserID1, int UserID2)
 {
-    struct User* User1=GetUser(UserID1);
-    User1->Friend=insert(User1->Friend,UserID2);
-    struct  User* User2= GetUser(UserID2);
-    User2->Follower=insert(User2->Follower,UserID1);
+    struct User *User1 = GetUser(UserID1);
+    if (!search(User1->Friend, UserID2))
+    {
+        User1->Friend = insert(User1->Friend, UserID2);
+        User1->NoOfFriends += 1;
+    }
+    struct User *User2 = GetUser(UserID2);
+    if (!search(User2->Follower, UserID1))
+    {
+        User2->Follower = insert(User2->Follower, UserID1);
+        User2->NoOfFollowers += 1;
+    }
 }
