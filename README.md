@@ -8,7 +8,7 @@ International Institute of Information Technology Hyderabad
 MOTIVATION
 
 We are fascinated about how Facebook manages to recommend friends which are in most of the cases related to us in some ways.
-So we decided to come up with own system to recommend friends.
+This served as an inspiration to design our own Friends Recommendation System.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 ABOUT
@@ -17,11 +17,12 @@ The project is on Friends Recommendation system.
 
 A system which manages our friends. The system keeps record of the people we wish to follow and people who wish to follow us along with the details(like age , city , organization).
 
-This system is a bit different from the facebook. In this system a person A may follow person B but person B need not follow person A.  
+In this system a person A may follow person B, but it does not imply that person B follows person A.  
 
 A new user can register and delete his/her account very easily. Each user has his/her unique UserID.
 
-The system recommends friends to you(makes it easier to search friends).
+The system recommends friends to both new users, as well as already registered users.
+We can also search friends quickly.
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 PROGRAMMING LANGUAGE
@@ -53,6 +54,9 @@ The order of preference is: second friends > third friends > fourth friends and 
 INSTRUCTIONS ON COMPILATION
 
 You are just required to compile the file Menu.c and then run the program.
+Commands:
+gcc Menu.c
+./a.out
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 HOW TO RUN TEST CASES?
