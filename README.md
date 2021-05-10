@@ -1,20 +1,28 @@
 DSA Friends Recommendation Project 
+
 Team 55
+
 International Institute of Information Technology Hyderabad
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 MOTIVATION
+
 We are fascinated about how Facebook manages to recommend friends which are in most of the cases related to us in some ways.
 So we decided to come up with own system to recommend friends.
 ---------------------------------------------------------------------------------------------------------------------------------------
 ABOUT
+
 The project is on Friends Recommendation system.
 A system which manages our friends. The system keeps record of the people we wish to follow and people who wish to follow us along with the details(like age , city , organization).
 This system is a bit different from the facebook. In this system a person A may follow person B but person B need not follow person A.  
 A new user can register and delete his/her account very easily. Each user has his/her unique UserID.
 The system recommends friends to you(makes it easier to search friends).
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 PROGRAMMING LANGUAGE
+
 The whole code has been written using basic C language. The core concepts used in the project are HASHTABLES , AVL TREES AND GRAPH THEORY.
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 HOW DOES THE SYSTEM WORK?
 
