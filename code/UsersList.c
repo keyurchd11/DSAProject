@@ -1,8 +1,13 @@
 #include "UsersList.h"
-#include <stdio.h>
-#include <stdlib.h>
 #include <assert.h>
 #include <string.h>
+
+//////////////////////////////////////////////////////////////////////////////////////
+// This file contains the declaration of functions which will be used to store data 
+// of the users corresponding to the UserIDs
+// everytime a new User registers, we store their detail in a hash function and
+// all other operations are done using the UserID only
+//////////////////////////////////////////////////////////////////////////////////////
 
 int HashFn(int UserID)
 {
@@ -29,9 +34,7 @@ PtrToUser InitUserNode(int UserID, int Age, char *UserName, char *UserCity, char
     Q->Organization = (char *)(malloc(sizeof(char) * 100));
     assert(Q->Organization != NULL);
 
-    printf("%s\n", UserName);
     strcpy(Q->Name, UserName);
-    printf("%s\n", Q->Name);
     strcpy(Q->City, UserCity);
     strcpy(Q->Organization, UserOrganization);
     Q->Next = NULL;
@@ -45,13 +48,13 @@ PtrToUser InitUserNode(int UserID, int Age, char *UserName, char *UserCity, char
 void RegisterNewUser(Hash UsersList[], int UserID, int Age, char *UserName, char *UserCity, char *UserOrganization)
 {
     int key = HashFn(UserID);
+    // if side chain is empty
     if (UsersList[key] == NULL)
     {
         UsersList[key] = (PtrToUser)(malloc(sizeof(UserDetails)));
         assert(UsersList[key] != NULL);
         UsersList[key]->Next = NULL;
     }
-
     //traverse until end of side chain
     PtrToUser Walk = UsersList[key];
     while (Walk->Next != NULL)
@@ -59,10 +62,6 @@ void RegisterNewUser(Hash UsersList[], int UserID, int Age, char *UserName, char
         Walk = Walk->Next;
     }
     Walk->Next = InitUserNode(UserID, Age, UserName, UserCity, UserOrganization);
-    // PtrToUser P = InitUserNode(UserID , Age , UserName , UserCity , UserOrganization);
-    // P->Next = UsersList[key]->Next;
-    // UsersList[key]->Next = P;
-    printf("%s HAS REGISTERED SUCCESSFULLY\n", UserName);
 }
 
 /////////////////////////////////////////////////////////////////////////////
@@ -74,7 +73,6 @@ PtrToUser SearchUser(Hash UsersList[], int UserID)
     int key = HashFn(UserID);
     if (UsersList[key] == NULL)
     {
-        printf("There is no such user!!!\n");
         return NULL;
     }
     PtrToUser P = UsersList[key]->Next;
@@ -84,12 +82,11 @@ PtrToUser SearchUser(Hash UsersList[], int UserID)
             return P;
         P = P->Next;
     }
-    printf("There is no such user!!!\n");
     return NULL;
 }
 
 /////////////////////////////////////////////////////////////////////////////
-// function : Delete(HT,UserID)
+// function : UnregisterUser(HT,UserID)
 // input    : HT and ID of the user to be deleted
 // result   : The node corresponding to the user with given UserID is deleted from HT
 void UnregisterUser(Hash UsersList[], int UserID)
@@ -102,10 +99,7 @@ void UnregisterUser(Hash UsersList[], int UserID)
     if (P == NULL)
     {
         UsersList[key] = NULL;
-        char *TempName;
-        strcpy(TempName, Prev->Name);
         free(P);
-        printf("%s HAS UNREGISTERED\n", TempName);
         return;
     }
     while (P != NULL)
@@ -115,9 +109,6 @@ void UnregisterUser(Hash UsersList[], int UserID)
         Prev = P;
         P = P->Next;
     }
-    char *TempName;
-    strcpy(TempName, P->Name);
     Prev->Next = P->Next;
     free(P);
-    printf("%s HAS UNREGISTERED\n", TempName);
 }
