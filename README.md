@@ -9,6 +9,7 @@ MOTIVATION
 
 We are fascinated about how Facebook manages to recommend friends which are in most of the cases related to us in some ways.
 So we decided to come up with own system to recommend friends.
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 ABOUT
 
